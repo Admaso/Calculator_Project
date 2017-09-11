@@ -1,1 +1,3 @@
-# Calculator_Project
+# Calculator_Project:
+
+Calculator using Html, JavaScript, CSS

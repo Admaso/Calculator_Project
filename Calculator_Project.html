@@ -1,0 +1,270 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+
+    <title>calc</title>
+
+    <style>
+
+        body {
+            background-image: url(https://previews.123rf.com/images/maxkabakov/maxkabakov1404/maxkabakov140401297/27771782-News-concept-pixelated-Calculator-icon-on-digital-background-empty-copyspace-for-card-text-advertisi-Stock-Photo.jpg);
+        }
+
+        div 
+        {
+            border: 5px groove black;            
+            width: 500px;
+            height: 700px;
+            margin: 100px;
+            background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRd_JnzHQV5HFg-yLZmWOstDA-A6ujZjslol1qJO8jtrGJZiml7YA);
+            border-radius: 150px 150px;
+        }
+
+        textarea {
+            width: 400px;
+            height: 80px;
+            margin-left: 40px;
+            margin-top: 80px;
+            padding-top: 20px;
+            padding-left: 20px;
+            font-size: 50px;
+            border: 5px solid black;
+            border-radius: 150px 150px;
+            background-color: rgba(255, 0, 0, 0.76);
+            color: white;            
+        }
+
+        button {
+            width: 72px;
+            height: 60px;
+            margin: 15px;
+            background-color: #0e536e;
+            border: 4px solid black;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 30px;
+            border-radius: 150px 150px;
+            cursor: pointer;
+        }
+
+        table
+        {
+            margin-left: 35px;           
+            margin-top: 20px;
+        }
+
+        #bigger
+        {
+            height:185px;
+            margin-bottom:-100px;
+            margin-top:-35px;
+        }
+        #ElseBidder 
+        {
+            width: 185px;
+            margin-right:-150px;
+            margin-left:20px;
+        }
+        
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <div>
+        <textarea readonly id="textId" rows="1" cols="10"></textarea>
+        <table>
+            <tr>
+                <td><button onclick="AllClear()">AC</button></td>
+                <td><button onclick="Division()">/</button></td>
+                <td><button onclick="Multiplication()">x</button></td>
+                <td><button onclick="Subtraction()">-</button></td>
+            </tr>
+            <tr>
+                <td><button onclick="num7()">7</button></td>
+                <td><button onclick="num8()">8</button></td>
+                <td><button onclick="num9()">9</button></td>
+                <td><button id="bigger" onclick="add()">+</button></td>
+            </tr>
+            <tr>
+                <td><button onclick="num4()">4</button></td>
+                <td><button onclick="num5()">5</button></td>
+                <td><button onclick="num6()">6</button></td>
+                
+            </tr>
+            <tr>
+                <td><button onclick="num1()">1</button></td>
+                <td><button onclick="num2()">2</button></td>
+                <td><button onclick="num3()">3</button></td>
+                <td><button id="bigger" onclick="Result()">=</button></td>
+            </tr>
+            <tr>
+                <td><button onclick="num0()">0</button></td>
+                <td><button onclick="dot()">.</button></td>
+                <td><button onclick="OneClear()">C</button></td>                
+            </tr>
+
+        </table>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <script>
+
+        var action = 0;
+
+        function num1() { document.getElementById('textId').innerHTML += '1'; }
+        function num2() { document.getElementById('textId').innerHTML += '2'; }
+        function num3() { document.getElementById('textId').innerHTML += '3'; }
+        function num4() { document.getElementById('textId').innerHTML += '4'; }
+        function num5() { document.getElementById('textId').innerHTML += '5'; }
+        function num6() { document.getElementById('textId').innerHTML += '6'; }
+        function num7() { document.getElementById('textId').innerHTML += '7'; }
+        function num8() { document.getElementById('textId').innerHTML += '8'; }
+        function num9() { document.getElementById('textId').innerHTML += '9'; }
+        function num0() { document.getElementById('textId').innerHTML += '0'; }
+        function dot() { document.getElementById('textId').innerHTML += '.'; }
+
+
+        function AllClear()
+        {
+            document.getElementById('textId').innerHTML = '';
+            action = 0;
+        }
+
+        function OneClear()
+        {
+            var sub = document.getElementById('textId').innerHTML.length;
+            sub -= 1;
+            var str = document.getElementById('textId').innerHTML.slice(0, sub);
+            document.getElementById('textId').innerHTML = str;
+        }
+
+
+
+        function add()
+        {
+            if (action == 0)
+            {
+                document.getElementById('textId').innerHTML += '+';  
+                action++;
+            }                         
+        }
+
+        function Subtraction()
+        {
+            if (action == 0)
+            {
+                document.getElementById('textId').innerHTML += '-';
+                action++;               
+            }
+        }
+
+        function Division()
+        {
+            if (action == 0)
+            {
+                document.getElementById('textId').innerHTML += '/';
+                action++;              
+            }
+        }
+
+        function Multiplication()
+        {
+            if (action == 0) {
+                document.getElementById('textId').innerHTML += '*';
+                action++;               
+            }
+        }
+
+        function Result()
+        {
+            
+            if (document.getElementById('textId').innerHTML.indexOf('+') > 0)
+            {
+                var TheAdderPlace = document.getElementById('textId').innerHTML.indexOf('+');
+               
+                var a = document.getElementById('textId').innerHTML.slice(0, TheAdderPlace);
+                var bAddStart = TheAdderPlace + 1;
+                var bAddEnd = document.getElementById('textId').innerHTML.length;
+                var b = document.getElementById('textId').innerHTML.slice(bAddStart, bAddEnd);
+
+                a = parseFloat(a);
+                b = parseFloat(b);  
+
+                var add = a + b;
+
+                document.getElementById('textId').innerHTML = add;
+            }
+
+            else if (document.getElementById('textId').innerHTML.indexOf('-') > 0)
+            {
+                var TheSuberPlace = document.getElementById('textId').innerHTML.indexOf('-');
+                
+                var a = document.getElementById('textId').innerHTML.slice(0, TheSuberPlace);
+                var bSubStart = TheSuberPlace + 1;
+                var bSubEnd = document.getElementById('textId').innerHTML.length;
+                var b = document.getElementById('textId').innerHTML.slice(bSubStart, bSubEnd);
+
+                a = parseFloat(a);
+                b = parseFloat(b);  
+
+                var sub = a - b;
+
+                document.getElementById('textId').innerHTML = sub;
+            }
+
+            else if (document.getElementById('textId').innerHTML.indexOf('/') > 0)
+            {
+                var TheDiverPlace = document.getElementById('textId').innerHTML.indexOf('/');
+
+                var a = document.getElementById('textId').innerHTML.slice(0, TheDiverPlace);
+                var bDivStart = TheDiverPlace + 1;
+                var bDivEnd = document.getElementById('textId').innerHTML.length;
+                b = document.getElementById('textId').innerHTML.slice(bDivStart, bDivEnd);
+
+                a = parseFloat(a);
+                b = parseFloat(b); 
+                
+                var Div = a / b;
+
+                document.getElementById('textId').innerHTML = Div;
+            }
+
+            else if (document.getElementById('textId').innerHTML.indexOf('*') > 0)
+            {
+                var TheMulerPlace = document.getElementById('textId').innerHTML.indexOf('*');
+                
+                var a = document.getElementById('textId').innerHTML.slice(0, TheMulerPlace);
+                var bMulStart = TheMulerPlace + 1;
+                var bMulEnd = document.getElementById('textId').innerHTML.length;
+                var b = document.getElementById('textId').innerHTML.slice(bMulStart, bMulEnd);
+
+                a = parseFloat(a);
+                b = parseFloat(b);
+
+                var Mul = a * b;
+
+                document.getElementById('textId').innerHTML = Mul; 
+            }
+
+            else
+            {
+                alert('Oops you got a mistake. To retry, press the AC button');
+            }
+        }
+
+
+
+
+    </script>
+    
+</body>
+</html>
